@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/bd2-estimote-server.iml" filepath="$PROJECT_DIR$/bd2-estimote-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/estimote-api/estimote-api.iml" filepath="$PROJECT_DIR$/estimote-api/estimote-api.iml" />
+    </modules>
+  </component>
+</project>
