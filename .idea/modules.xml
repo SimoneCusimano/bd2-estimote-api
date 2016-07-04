@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/bd2-estimote-server.iml" filepath="$PROJECT_DIR$/bd2-estimote-server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/estimote-api/estimote-api.iml" filepath="$PROJECT_DIR$/estimote-api/estimote-api.iml" />
     </modules>
   </component>
 </project>
