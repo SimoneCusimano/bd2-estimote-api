@@ -7,7 +7,7 @@ var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
 
 var mongoose   = require('mongoose');
-mongoose.connect('mongodb://mongodb-server.cloudapp.net:27017'); // connect to our database
+mongoose.connect('mongodb://mongodb-server.cloudapp.net:27017/bd2-estimote'); // connect to our database
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
@@ -43,8 +43,35 @@ router.route('/estimotes')
     // create an estimote (accessed at POST http://localhost:8080/api/estimotes)
     .post(function(req, res) {
 
-        var estimote = new Estimote();      // create a new instance of the Estimote model
-        estimote.name = req.body.name;      // set the estimote name (comes from the request)
+        // create a new instance of the Estimote model
+        var estimote = Estimote(
+            {
+                batteryLevel: "UNKNOWN",
+                color: "CANDY_FLOSS",
+                currentMotionStateDuration: 40,
+                identifier: "a91e64438b8ea261",
+                isMoving: false,
+                lastMotionStateDuration: 8,
+                orientation: "HORIZONTAL",
+                power: "LEVEL_7",
+                hardwareVersion: "SB0",
+                firmwareVersion: "Unknown",
+                bootloaderVersion: "SB1.0.0",
+                firmwareState: "APP",
+                region : {
+                    identifier: "nearable-a91e64438b8ea261",
+                    major: 35726,
+                    minor: 41569,
+                    proximityUUID: "d0d3fa86-ca76-45ec-9bd9-6af4a91e6443"
+                },
+                rssi: -61,
+                temperature: 25.938,
+                type: "CAR",
+                xAcceleration: -46.875,
+                yAcceleration: -125,
+                zAcceleration: -984.375
+            }
+        );
 
         // save the estimote and check for errors
         estimote.save(function (err) {
