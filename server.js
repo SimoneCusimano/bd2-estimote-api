@@ -43,43 +43,24 @@ router.route('/estimotes')
     // create an estimote (accessed at POST http://localhost:8080/api/estimotes)
     .post(function(req, res) {
 
-        // create a new instance of the Estimote model
-        var estimote = Estimote(
-            {
-                batteryLevel: "UNKNOWN",
-                color: "CANDY_FLOSS",
-                currentMotionStateDuration: 40,
-                identifier: "a91e64438b8ea261",
-                isMoving: false,
-                lastMotionStateDuration: 8,
-                orientation: "HORIZONTAL",
-                power: "LEVEL_7",
-                hardwareVersion: "SB0",
-                firmwareVersion: "Unknown",
-                bootloaderVersion: "SB1.0.0",
-                firmwareState: "APP",
-                region : {
-                    identifier: "nearable-a91e64438b8ea261",
-                    major: 35726,
-                    minor: 41569,
-                    proximityUUID: "d0d3fa86-ca76-45ec-9bd9-6af4a91e6443"
-                },
-                rssi: -61,
-                temperature: 25.938,
-                type: "CAR",
-                xAcceleration: -46.875,
-                yAcceleration: -125,
-                zAcceleration: -984.375
-            }
-        );
+        var estimotes = JSON.parse(req.body.Estimotes);
 
-        // save the estimote and check for errors
-        estimote.save(function (err) {
-            if (err)
-                res.send(err);
+        // the string parsed is a List<List<Nearable>> with one element that is the List<Nearable> needed
+        estimotes = estimotes[0];
 
-            res.json({message: 'Estimote created!'});
-        });
+        for (var index in estimotes) {
+            // create a new instance of the Estimote model
+            var estimote = Estimote(estimotes[index]);
+
+            // save the estimote and check for errors
+            estimote.save(function (err) {
+                if (err)
+                    res.send(err);
+            });
+        }
+
+        res.json({message: estimotes.length + ' Estimote(s) created!'});
+
     })
 
     // get all the estimotes (accessed at GET http://localhost:8080/api/estimotes)
